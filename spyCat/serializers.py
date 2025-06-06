@@ -1,14 +1,13 @@
 import requests
 from rest_framework import serializers
-from spyCat.models import SpyCat, Breed
+from spyCat.models import SpyCat
 
-
-class BreedSerializer(serializers.ModelSerializer):
+class SpyCatSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Breed
-        fields = ('id', 'name')
+        model = SpyCat
+        fields = ('id', 'name', "years_of_experience", "breed", "salary")
 
-    def validate_name(self, value):
+    def validate_breed(self, value):
         response = requests.get('https://api.thecatapi.com/v1/breeds')
         if response.status_code != 200:
             raise serializers.ValidationError("Failed to validate breed: TheCatAPI unavailable")
@@ -20,10 +19,3 @@ class BreedSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(f"Breed '{value}' is not recognized by TheCatAPI.")
 
         return value
-
-
-class SpyCatSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SpyCat
-        fields = ('id', 'name', "years_of_experience", "breed", "salary")
-
