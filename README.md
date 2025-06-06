@@ -65,6 +65,8 @@ http://127.0.0.1:8000/
 
 
 
+When the back end server ready follow a link and configure the front end server:
+https://github.com/tkachuk2291/spy-cat-agency-frontend
 
 
 
